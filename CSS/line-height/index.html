@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>line-height</title>
+    <style>
+        body{
+            /*这个line-height相对每个行而言,不是相对body的font-size的16px而言*/
+            line-height: 2;
+            /*但是如果line-height:200%;则这个line-height是相对根元素的16px计算所得*/
+            /*引用自 "http://www.zhangxinxu.com/wordpress/2009/11/css行高line-height的一些深入理解及应用/"*/
+        /*150%虽然和1.5在值上是一样的，但是它们也是有差别的，差别在于继承性，使用百分比会计算line-height的值，然后以px像素为单位继承下去，而1.5则是先继承1.5这个值，遍历到了该标签再计算去line-height的像素值。所以同样的效果只需要.article_box{line-height:1.5;}就可以实现了。*/
+        }
+        p{
+            width:200px;
+            height: 200px;
+            overflow:hidden;
+        }
+    </style>
+</head>
+<body>
+<div id="container"></div>
+    <!--第一个p标签的行高为16*1.2*2-->
+    <p id="one" style="font-size:120%;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet architecto asperiores id laborum neque nisi nostrum numquam, optio quisquam repellendus sapiente voluptate voluptates. Ea esse laborum magni porro tempore. Aliquid.</p>
+    <!--第二个p标签的行高为16*2-->
+    <p id="two" style="font-size:100%;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet architecto asperiores id laborum neque nisi nostrum numquam, optio quisquam repellendus sapiente voluptate voluptates. Ea esse laborum magni porro tempore. Aliquid.</p>
+    <div id="three"></div>
+    <div id="four">body's line-height is 2</div>
+<button id="btn">click to change line-height of body</button>
+<script src="../../../../ForTest/jquery.js"></script>
+<script>
+    var flag = 0;
+    function computed(){
+        var one = getComputedStyle(document.getElementById('one')),
+                two= getComputedStyle(document.getElementById('two')),
+                oneFontSize = one.fontSize,
+                twoFontSize = two.fontSize,
+                oneLineHeight = one.lineHeight,
+                twoLineHeight = two.lineHeight;
+        document.getElementById('three').innerHTML =
+                'oneFontSize:' + oneFontSize +
+                ';  oneLineHeight:' + oneLineHeight +
+                ';  twoFontSize:' + twoFontSize +
+                ';  twoLineHeight:' + twoLineHeight;
+    }
+    computed();
+var btn = document.getElementById('btn');
+    btn.addEventListener('click',function(){
+        if(flag%2 == 0){
+            document.body.style.lineHeight = '200%';
+            document.getElementById('four').innerHTML = "body's line-height is 200%" ;
+            computed();
+            flag++;
+        }else{
+            document.body.style.lineHeight = '2';
+            document.getElementById('four').innerHTML = "body's line-height is 2" ;
+            computed();
+            flag++;
+        }
+    });
+</script>
+</body>
+</html>

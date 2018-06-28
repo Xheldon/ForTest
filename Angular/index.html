@@ -1,0 +1,25 @@
+<!doctype html>
+<!--<html ng-app="project">-->
+<html ng-app="testModule">
+<head>
+    <script type="text/javascript" src="angular.min.js"></script>
+    <script type="text/javascript" src="project.js"></script>
+</head>
+<body>
+<div ng-controller="testController">
+    <select name="" id="" ng-model="selectOption">
+        <option value="name">order By Name</option>
+        <option value="sex">order By Sex</option>
+        <option value="age">order By Age</option>
+    </select>
+    <ul>
+        <!--<li ng-repeat="info in obj | limitTo: 2">--><!--只显示前两个-->
+        <li ng-repeat="info in obj | orderBy: selectOption">
+            name:{{info.name}},sex:{{info.sex}},age:{{info.age | currency}}
+            <button ng-click="alertName(info)">点击增加,科科</button>
+        </li>
+    </ul>
+</div>
+<!--<script src="project.js"></script>-->
+</body>
+</html>

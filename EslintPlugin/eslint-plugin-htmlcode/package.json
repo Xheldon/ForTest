@@ -1,0 +1,28 @@
+{
+    "name": "eslint-plugin-htmlcode",
+    "version": "0.0.1",
+    "description": "把这个放到 node_modules 文件夹中装作已经安装过来测试",
+    "keywords": [
+      "eslint",
+      "eslintplugin",
+      "eslint-plugin"
+    ],
+    "author": "Xheldon <c1006044256@gmail.com>",
+    "main": "index.js",
+    "scripts": {
+      "test": "mocha tests --recursive"
+    },
+    "dependencies": {
+      "htmlparser2": "^3.9.2",
+      "requireindex": "~1.1.0"
+    },
+    "devDependencies": {
+      "eslint": "^3.19.0",
+      "mocha": "^3.1.2"
+    },
+    "engines": {
+      "node": ">=0.10.0"
+    },
+    "license": "ISC"
+  }
+  

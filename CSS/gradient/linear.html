@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Linear-gradient</title>
+    <style>
+        div{
+            float: left;
+            margin-right: 20px;
+            width: 400px;
+            height: 400px;
+        }
+        #container1{
+            background: linear-gradient(0deg, red, blue);
+            background: -webkit-linear-gradient(0deg, red, blue);
+            /*background: -webkit-linear-gradient(top right, #ace 50%, #f96 60%, #eee);*/
+        }
+        #container2{
+            background: linear-gradient(30deg, red, blue);
+            background: -webkit-linear-gradient(30deg, red, blue);
+        }
+        #container3{
+            background: linear-gradient(60deg, red, blue);
+            background: -webkit-linear-gradient(60deg, red, blue);
+        }
+        #container4{
+            background: linear-gradient(90deg, red, blue);
+            background: -webkit-linear-gradient(90deg, red, blue);
+        }
+        #container5{
+            background: linear-gradient(-45deg, red, blue);
+        }
+        #container6{
+            background: linear-gradient(315deg, red, blue);
+        }
+        #container7{
+            background: -webkit-linear-gradient(top left, red, blue);
+        }
+        #container8{
+            background: linear-gradient(to top left, red, blue);
+        }
+    </style>
+</head>
+<body>
+<h1>线性渐变</h1>
+<div id="container1"></div>
+<div id="container2"></div>
+<div id="container3"></div>
+<div id="container4"></div>
+<div id="container5"></div>
+<div id="container6"></div>
+<div id="container7"></div>
+<div id="container8"></div>
+<section style="clear:left;"></section>
+<p>
+    注:-webkit-linear-gradient和标准linear-gradient的渐变,angle表示方法不一样.<br />
+    前者90度从下到上,0度从左到右.<br/>
+    后者90度从左到右,0度从下到上.<br/>
+    (请分别在chrome/safari和火狐下查看)
+</p>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test-Blur</title>
+    <style>
+        #container{
+            width: 500px;
+            height: 500px;
+            position: relative;
+            overflow: hidden;
+        }
+        .bg,.fg{
+            width: 500px;
+            height: 500px;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+        }
+        .fg,.blur{
+            -webkit-transition: all 2.5s;
+            -moz-transition: all 2.5s;
+            -ms-transition: all 2.5s;
+            -o-transition: all 2.5s;
+            transition: all 2.5s;
+        }
+        #container .bg img{
+            width: 500px;
+            height: 500px;
+        }
+        #container .fg{
+            position: absolute;
+        }
+        .fg .blur{
+            top: 0;
+            position: absolute;
+            -webkit-filter: blur(5px);
+            -moz-filter: blur(5px);
+            -o-filter: blur(5px);
+            -ms-filter: blur(5px);
+            filter: blur(5px);
+            height: 500px;
+            width: 500px;
+        }
+        .blur img{
+            width: 500px;
+            height: 500px;
+        }
+
+        .fg .content{
+            position: absolute;
+            width: 500px;
+            height: 500px;
+        }
+
+        .fg.max-top{
+            top: 500px;
+            -webkit-transition: all 2.5s;
+            -moz-transition: all 2.5s;
+            -ms-transition: all 2.5s;
+            -o-transition: all 2.5s;
+            transition: all 2.5s;
+        }
+        .blur.max-top{
+            top: -500px;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <div class="bg">
+        <img src="b.jpg">
+    </div>
+    <div class="fg">
+        <div class="blur">
+            <img src="b.jpg">
+        </div>
+        <div class="content">
+            这年头,地主家也没有余粮啊!
+        </div>
+    </div>
+</div>
+
+<script src="../../../../LittleTest/jquery.js"></script>
+<script>
+    $('#container').on('mouseenter',function(){
+        $('.fg').addClass('max-top');
+        $('.blur').addClass('max-top');
+    }).on('mouseleave',function(){
+        $('.fg').removeClass('max-top');
+        $('.blur').removeClass('max-top');
+    })
+</script>
+</body>
+</html>

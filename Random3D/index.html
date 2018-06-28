@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>random3D</title>
+    <style>
+        #container {
+            perspective: 10000px;
+            transition: all 1000ms linear;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -100px;
+            margin-left: -100px;
+            width: 200px;
+            height: 200px;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+    </style>
+    <script src="../../jquery.js"></script>
+</head>
+<body>
+<div id="container"></div>
+<script>
+    var plusOrMinus = function(){
+        return Math.random().toFixed(2) >= 0.5 ? 1 : 1;
+    };
+    var giveMeANumber = function(length){
+        return Math.random().toFixed(length);
+    };
+    var random = function (length) {
+        return '' + giveMeANumber(length)*plusOrMinus() +
+                ',' +
+                giveMeANumber(length)*plusOrMinus() +
+                ',' +
+                giveMeANumber(length)*plusOrMinus() +
+                ',' +
+                giveMeANumber(length)*plusOrMinus() +
+                ',' +
+                giveMeANumber(length)*plusOrMinus() +
+                ',' +
+                giveMeANumber(length)*plusOrMinus() +
+                ',' +
+                giveMeANumber(length)*plusOrMinus() +
+                ',' +
+                giveMeANumber(length)*plusOrMinus() +
+                ',' +
+                giveMeANumber(length)*plusOrMinus() +
+                ',' +
+                giveMeANumber(length)*plusOrMinus() +
+                ',' +
+                giveMeANumber(length)*plusOrMinus() +
+                ',' +
+                giveMeANumber(length)*plusOrMinus() +
+                ',' +
+                1 +
+                ',' +
+                1 +
+                ',' +
+                1 +
+                ',' +
+                giveMeANumber(length)*plusOrMinus()
+    };
+    var setAnimation = function(){
+        $('#container').css('transform','matrix3d(' + random(5) + ')');
+    };
+    setInterval(setAnimation,1000);
+</script>
+</body>
+</html>

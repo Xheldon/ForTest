@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HandlebarsDemo</title>
+    <!--<link href="css/bootstrap.css" type="text/css" rel="stylesheet">-->
+    <!--<link rel="stylesheet" href="css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="css/css.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+
+
+<!--######################################################################-->
+<!--###########################以下为导入相关JS############################-->
+<!--导入Json-->
+<script type="text/javascript" src="js/data.js"></script>
+<!--导入Handlebars 相关Js-->
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type='text/javascript' src="js/handlebars-v1.3.0.js"></script>
+
+<!--######################################################################-->
+<!--######################################################################-->
+
+<div id="_top">
+    <div id="_top_content" class="_common_1">
+        <!--登陆框，前面是模板生成的选项卡-->
+        <div id="_login_box">
+            <span><a href="#" class="_transition">登陆</a></span>
+            <span><a href="#" class="_transition">注册</a></span>
+            <span style="font-size: 17px">|</span>
+            <!--这里用 bootstrap 的组件，因为用 div 自己画的话实在太麻烦-->
+            <span class="glyphicon glyphicon-search _transition"><a href="#"></a></span>
+        </div>
+    </div>
+</div>
+<div id="_banner">
+    <!--这里放置 banner 选项-->
+</div>
+<div id="_select_card" class="_common_1">
+    <!--这里放置 select 选项-->
+</div>
+<div id="_select_content" class="_select_content">
+    <!--这里放置 select 内容-->
+</div>
+<div id="_main" class="_main">
+    <!--这里放置 video 内容-->
+    <div class="_jump_page">
+        <div class="_jump_bar">
+            <ul>
+                <!--偷了个懒没有写点击变色的效果，这个效果同上面的选择效果，故略去-->
+                <li><a>上一页</a></li>
+                <li><a>2</a></li>
+                <li><a>3</a></li>
+                <li><a>4</a></li>
+                <li><a>5</a></li>
+                <li><a>下一页</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+ <!--翻页 bar-->
+
+
+
+<div class="_footer">
+    <div class="_footer_top">
+        <div class="_common_1">
+            <div class="_footer_left">
+                <div class="_footer_left_one _footer_common">
+                    <img src="images/pic_logo.png" />
+                </div>
+                <!--这里放置 footer_list 的列表 内容-->
+            </div>
+            <div class="_footer_right">
+                <div class="_wx"><img src="images/pic_wx.gif"></div>
+                <div class="_how_to_contact_us">
+                    <ul>
+                        <li><a href="#"><span><img src="images/pic_kkllogo.gif" /> </span>官方论坛</a></li>
+                        <li><a href="#"><span><img src="images/pic_xlwb.gif" /> </span>立即关注</a></li>
+                        <li><a href="#"><span><img src="images/pic_txwb.gif" /> </span>立即收听</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="_footer_bottom">
+        <p>北京开云慧科网络科技有限公司版权所有京ICP证140465号京ICP备13032407号-1京公网安备100108020131622</p>
+        <p>公司地址：北京市海淀区学院路35号世宁大厦302A邮箱：kefu@kaileba.com</p>
+    </div>
+</div>
+
+<!--##########################以上为页面框架代码#############################-->
+<!--######################################################################-->
+
+<!--######################################################################-->
+<!--##################以下是模板生成代码#############################-->
+
+<!--定义顶部模板-->
+<script type="text/x-handlebars-template" id="script_top">
+    <!--来个 bannner 爽一下先-->
+    <img src={{images_text_logo}} />
+        <ul class="_top_list">
+            <li class="_top_ul_list _transition"><a href="#" class="_transition">{{{top_ul_list-one}}}</a></li>
+            {{#each top_ul_list}}
+            {{!顶部标签的模板列表}}
+            <li class="_top_ul_list"><a href="#" class="_transition">{{name}}</a></li>
+            {{/each}}
+        </ul>
+</script>
+<!--定义顶部模板 结束-->
+<!--定义 select 模板-->
+<script type="text/x-handlebars-template" id="script_select">
+    <!--默认显示的选项卡-->
+    <div class="{{select_card_default.select_card}}">
+        <div class="{{select_card_default.polygon}}">
+            <div class="{{select_card_default.polygon_top}}"></div>
+            <div class="{{select_card_default.polygon_middle}}"></div>
+            <div class="{{select_card_default.polygon_bottom}}">{{select_card_default.one_part}}</div>
+        </div>
+        <div class="{{select_card_default.select_text}}">
+            <p class="{{select_card_default.select_text_click}}">{{select_card_default.two_part}}</p>
+            <p class="{{select_card_default.select_text_click}}">{{select_card_default.three_part}}</p>
+        </div>
+    </div>
+    <!--模板生成的选项卡-->
+    {{#each select_card}}
+    <div class="{{select_card}}">
+        <div class="{{polygon}}">
+            <div class="{{polygon_top}}"></div>
+            <div class="{{polygon_middle}}"></div>
+            <div class="{{polygon_bottom}}">{{one_part}}</div>
+        </div>
+        <div class="{{select_text}}">
+            <p>{{two_part}}</p>
+            <p>{{three_part}}</p>
+        </div>
+    </div>
+    {{/each}}
+</script>
+<!--定义 select 模板 结束-->
+<!--定义 select_content 模板-->
+<script type="text/x-handlebars-template" id="script_select_content">
+    {{#each select_content}}
+    <div class="{{select_content}}">
+        <div class="_common_1">
+            <div class="{{select_content_top}}">{{title}}</div>
+            <div class="{{select_content_bottom}}">
+                <div class="_select_list">
+                    <ul>
+                        <li>{{list_text_title}}</li>
+                        <li><a href="#" class="{{select_list_click}}">{{list_choice}}</a></li>
+                        {{#each list_text}}
+                        <li><a href="#">{{list}}</a></li>
+                        {{/each}}
+                    </ul>
+                    <ul>
+                        <li>{{list_text_title_2}}</li>
+                        <li><a href="#" class="{{select_list_click_2}}">{{list_choice_2}}</a></li>
+                        {{#each list_text_2}}
+                        <li><a href="#">{{list}}</a></li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</script>
+<!--定义 select_content 模板 结束-->
+
+<!--定义 video 模板-->
+<script type="text/x-handlebars-template" id="script_main">
+    {{#each main}}
+    <div class="{{main_num}}">
+        <div class="_common_1 _activity">
+            <div class="_simple_intro">
+                <div class="{{main_img}}">
+                    {{#if is_going}}
+                    <div class='_approve'>
+                        <div class='_approve_left'></div>
+                        <div class='_approve_middle'>报名中</div>
+                        <div class='_approve_right'></div>
+                    </div>
+                    {{else}}
+                    <div class='_not_approve'>
+                        <div class='_not_approve_left'></div>
+                        <div class='_not_approve_middle'>已结束</div>
+                        <div class='_not_approve_right'></div>
+                    </div>
+                    {{/if}}
+                    <img src="{{image_detail}}"/>
+                </div>
+                <div class="_main_introduce">
+                    <div class="_introduce_title">{{introduce_title}}</div>
+                    <div class="_introduce_unit">
+                        <span>主办单位：</span>
+                        <span>{{unit}}</span>
+                    </div>
+                    <div class="_introduce_guest">
+                        <div class="_introduce_people">主讲嘉宾：</div>
+                        <div class="_introduce_people_introduce">
+                            <ul>
+                                <!--人名的text-align:justify两端对齐无效，只能用脚本了，蛋疼-->
+                                {{#each guest}}
+                                <li><span>{{name}}</span><span>{{introduce}}</span></li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="_more_detail"><a href="#">查看活动详情<span class="glyphicon glyphicon-menu-right"></span></a></div>
+                </div>
+
+                {{#if is_going}}
+                <div class="_approve_QR">
+                    <img src="{{approve_QR}}" />
+                    <div>{{approve_QR_info}}</div>
+                </div>
+                {{else}}
+                <div class="_approve_end">
+                    <div class="_approve_end_text">活动已结束</div>
+                    <div>{{approve_end}}</div>
+                </div>
+                {{/if}}
+            </div>
+            <div class="_my_god_why_many_video">
+                <div class="_video_text">
+                    <span class="_video_text_left">主办方往期精彩视频</span>
+                    <span class="_video_text_right"><a href="#">查看更多<span class="glyphicon glyphicon-menu-right"></span></a></span>
+                </div>
+                <div class="_video_list">
+                    <ul>
+                        {{#each video}}
+                        <li>
+                            <div class="_video">
+                                <div class="_video_image">
+                                    <img src="{{image}}" />
+                                </div>
+                                <div class="_video_list_text">
+                                    <div class="_video_list_text_title">{{text_title}}</div>
+                                    <div class="_video_list_text_content">{{text_content}}</div>
+                                </div>
+                                <div class="_video_teacher">
+                                    <span>讲师：{{{teacher}}}</span>
+                                    <span class="_people_num">{{people_num}}</span>
+                                    <span class="glyphicon glyphicon-user _people_logo"></span>
+                                </div>
+                                <div class="_video_bar"></div>
+                            </div>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</script>
+<!--定义 video 模板  结束-->
+<script type="text/x-handlebars-template" id="script_footer">
+    {{#each footer}}
+        <div class="_footer_common">
+                <ul>
+                    <li>{{title}}</li>
+                {{#each footer_list}}
+                    <li><a href="#">{{content}}</a></li>
+                {{/each}}
+                </ul>
+        </div>
+    {{/each}}
+</script>
+<!--定义 footer list 模板-->
+
+
+
+<!--定义 footer list 模板  结束-->
+
+<!--######################################################################-->
+<!--####################以下为引入模板代码###################################-->
+
+<script id="run">
+    (function(){
+        //################生成顶部模板###########################
+        var script_top = $("#script_top").html();
+        var script_top_template = Handlebars.compile(script_top);
+        var script_top_html = script_top_template(top_list);
+        $(script_top_html).insertBefore('#_login_box');
+        //#############生成select模板#########################
+        var script_select = $("#script_select").html();
+        var script_select_template = Handlebars.compile(script_select);
+        var script_select_html = script_select_template(top_list);
+        $('#_select_card').append(script_select_html);
+        //#############生成select-content模板################
+        var script_select_content = $("#script_select_content").html();
+        var script_select_content_template = Handlebars.compile(script_select_content);
+        var script_select_content_html = script_select_content_template(top_list);
+        $('#_select_content').append(script_select_content_html);
+        //#############生成 video 模板####################
+        var script_main = $("#script_main").html();
+        var script_main_template = Handlebars.compile(script_main);
+        var main_html = script_main_template(top_list);
+        $(main_html).insertBefore('._jump_page');
+        //#############生成底部列表模板####################
+        var script_footer = $("#script_footer").html();
+        var script_footer_template = Handlebars.compile(script_footer);
+        var script_footer_html = script_footer_template(top_list);
+        $(script_footer_html).insertAfter('._footer_left_one');
+    })();
+</script>
+
+<!--########自己的 js ########################################-->
+<script type='text/javascript' src="js/js.js"></script>
+</body>
+</html>

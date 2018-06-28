@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>webWorker</title>
+</head>
+<body>
+<script src="index-2.js"></script>
+<script>
+//    共享线程示例
+    var share = new Worker("shareBranch.js");
+    share.postMessage('this from index2');
+    share.onmessage = function(e){
+        console.log("index2 from shareBranch's message say:", e.port);
+    };
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>son</title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            background: skyblue;
+        }
+
+        #container {
+        }
+    </style>
+</head>
+<body>
+<div id="son-container">sonPage</div>
+
+<script>
+    var son = function () {
+        console.log('son');
+    };
+
+    parent.hasLoaded(son);
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>inline-block</title>
+    <style>
+        #container {
+            height: 500px;
+            background: darkblue;
+        }
+        .one,.two{
+            width: 200px;
+            height: 200px;
+            display: inline-block;
+        }
+        .one{
+            background: blanchedalmond;
+        }
+        .two{
+            background: salmon;
+        }
+
+        .mulit_line{line-height:150px; border:1px dashed #cccccc; padding-left:5px;}
+        .mulit_line span{display:-moz-inline-stack; display:inline-block; line-height:1.4em; vertical-align:middle;}
+        .mulit_line i{width:0; display:-moz-inline-stack; display:inline-block; vertical-align:middle; font-size:0;}
+    </style>
+</head>
+<body>
+<div id="container">sasAÅÍ
+    <div class="one">one</div>
+    <div class="two">two</div>
+</div>
+<div style="background: fuchsia;">
+    <span style="line-height: 20px;background: forestgreen">什么值得买</span>
+    <span style="line-height: 30px;background: saddlebrown">今天是是个好日子</span>
+</div>
+
+<p class="mulit_line">
+    <span style="font-size:12px;">这里是高度为150像素的标签内的多行文字，文字大小为12像素。<br />这里是第二行，用来测试多行的显示效果。</span><i>&nbsp;</i>
+</p>
+<script src="../../../../ForTest/jquery.js"></script>
+<script>
+
+</script>
+</body>
+</html>
