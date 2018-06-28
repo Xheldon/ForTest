@@ -1,0 +1,23 @@
+{
+  "name": "node-test",
+  "version": "0.0.1",
+  "description": "some small test for node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://Xheldon@github.com/Xheldon/Node.git"
+  },
+  "keywords": [
+    "node",
+    "test"
+  ],
+  "author": "http://xheldon.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Xheldon/Node/issues"
+  },
+  "homepage": "https://github.com/Xheldon/Node#readme"
+}

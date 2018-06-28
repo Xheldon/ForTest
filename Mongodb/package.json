@@ -1,0 +1,14 @@
+{
+  "name": "testmongdb",
+  "version": "0.0.1",
+  "description": "this is test for mongdb",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mongodb"
+  ],
+  "author": "Xheldon",
+  "license": "MIT"
+}

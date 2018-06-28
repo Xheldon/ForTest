@@ -1,0 +1,26 @@
+{
+  "name": "fortest",
+  "version": "0.0.1",
+  "description": "a test just for test",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.15.2",
+    "grunt-browser-sync": "^2.2.0"
+  },
+  "devDependencies": {
+    "body-parser": "^1.17.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://Xheldon@github.com/Xheldon/ForTest.git"
+  },
+  "author": "Xheldon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Xheldon/ForTest/issues"
+  },
+  "homepage": "https://github.com/Xheldon/ForTest#readme"
+}

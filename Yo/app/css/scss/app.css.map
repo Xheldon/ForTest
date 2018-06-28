@@ -1,0 +1,12 @@
+{
+	"version": 3,
+	"file": "app.css",
+	"sources": [
+		"app.scss"
+	],
+	"sourcesContent": [
+		"body{\n  #scss-test-1{\n    background-color: #00AA00;\n  }\n}"
+	],
+	"mappings": "AAAA,IAAI,CACF,YAAY,CAAA;EACV,gBAAgB,EAAE,OAAQ,GAC3B",
+	"names": []
+}

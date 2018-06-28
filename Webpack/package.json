@@ -1,0 +1,15 @@
+{
+  "name": "Webpack",
+  "version": "0.0.1",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "s": "rm -rf ./build && webpack"
+  },
+  "keywords": [],
+  "author": "Xheldon",
+  "license": "ISC",
+  "dependencies": {
+    "webpack": "^3.10.0"
+  }
+}

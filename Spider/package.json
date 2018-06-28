@@ -1,0 +1,19 @@
+{
+  "name": "test_spider",
+  "version": "0.0.1",
+  "dependencies": {
+    "request": "~2.53.0",
+    "cheerio": "~0.18.0",
+    "mkdirp": "~0.5.1"
+  },
+  "description": "this is a test aim at to creat a spider",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "spider"
+  ],
+  "author": "Xheldon",
+  "license": "MIT"
+}
