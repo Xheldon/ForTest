@@ -57,26 +57,19 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "http://localhost.xheldon.com/assets/7418639f2c4029926ec9/";
+/******/ 	__webpack_require__.p = "http://localhost.xheldon.com/assets/js/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
-/***/ (function(module, exports, __webpack_require__) {
+/******/ ({
 
-__webpack_require__(1);
-console.log('index');
-
-/***/ }),
-/* 1 */
+/***/ 2:
 /***/ (function(module, exports) {
 
-module.exports = () => {
-    console.log('bar');
-}
+console.log('post');
 
 /***/ })
-/******/ ]);
+
+/******/ });
