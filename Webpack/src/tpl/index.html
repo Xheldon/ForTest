@@ -7,6 +7,10 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
 </head>
 <body>
+<script>
+    window.publicPath = 'http://a.com';
+</script>
+<!--这个可以传入 htmlwebpackplugin 的个性化参数-->
 <%= htmlWebpackPlugin.options.data.build %>
 </body>
 </html>
