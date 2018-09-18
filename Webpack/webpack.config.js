@@ -10,6 +10,7 @@ let entries = glob.sync('./src/entries/**/index.js').reduce((prev, curr) => {
 }, {});
 
 console.log(entries);
+console.log('???', path.join(__dirname, 'build'));
 
 let htmls = Object.keys(entries).map((html) => {
     return new HWP({
@@ -69,11 +70,24 @@ module.exports = () => { // 多种配置类型: https://webpack.docschina.org/co
                             }
                         }
                     ]
+                },
+                {
+                    test: /\.(png|jpeg|jpg|gif)$/,
+                    use: [{
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[hash:8].[ext]', // 配置文件在页面的路径和文件名, 可以带上路径如 /img/[name].[hash:8].[ext]
+                            publicPath: 'http://img.xheldon.com', // 发布链接, 用于 cdn, 不会加上下面的 outputPath
+                            outputPath: '/image', // 打包输出生成的目录结构文件夹, 通常打包
+                            useRelativePath: true, // 默认是 false, 即将文件放在 outputPath 下, 如果设置为 true, 则会根据文件所在的相对路径输出(此例子中, false 会输出为 image/xxx, true 会输出为 image/relative_path/xxx)
+                            emitFile: false // 是否生成文件, 默认是 true, false 的使用场景是引用了 cdn 的图片(设置了 publicPath)
+                        }
+                    }]
                 }
             ]
         },
         resolve: { // https://webpack.docschina.org/configuration/resolve/#resolve-mainfields
-            modules: [], // 指定 import 搜索的文件夹, 顺序从左到右
+            modules: ['node_modules'], // 指定 import 搜索的文件夹, 顺序从左到右
             alias: {
                 '@src': path.resolve(__dirname, 'src') // import 模块的别名
             },
@@ -86,10 +100,21 @@ module.exports = () => { // 多种配置类型: https://webpack.docschina.org/co
             unsafeCache: true, // 缓存模块, 用来在 import 的时候缓存模块, 可用正则匹配 /src\/bar.js/, 匹配为 true 则缓存
             plugins: [] // 在解析路径的时候用到的额外的路径解析插件
         },
-        resolveLoader: {}, // 同上面的 resolve 相同, 只是用于解析 loader 包
+        devServer: { // 装了 webpack-dev-server 了才能用, 3以上还要安装 webpack-cli, 装完还报错 TypeError: Cannot match against 'undefined' or 'null'
+            // 搜索了下才知道, webpack 版本是 3 的话, w-d-s 版本需要时2; w 版本是 4 的话, w-d-s 才能是3 , 因此降级w-d-s~~~
+            contentBase: path.join(__dirname, '/build'),
+            open: true, // 启动后自动打开浏览器
+            compress: true,
+            port: 9000,
+            noInfo: false, // 是否输出打包信息, 仍然会输出编译警告和错误
+            quiet: false, // 完全屏蔽掉所有的输出信息
+            hot: true // 通过该配置文件 webpack.config.js 启动的热替换, 需要手动添加 webpack.HotModuleReplacementPlugin 到配置文件 才能完全启用热替换
+            // 通过命令行参数 webpack --hot 或者 webpack-dev-server --hot 启动的则会自动添加该插件
+        },
+        resolveLoader: {}, // 同上面的 resolve 相同, 只是用于解析 webpack 加载的 loader 包
         plugins: htmls.concat(new CWP({
             isTrue: true
-        }))/*.concat([
+        })).concat(new webpack.HotModuleReplacementPlugin)/*.concat([
             new webpack.optimize.CommonsChunkPlugin({
                 name: 'shit',
                 filename: 'fuck.[hash:6].js',
