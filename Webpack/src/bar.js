@@ -1,4 +1,4 @@
-__webpack_public_path__ = window.publicPath;
+// __webpack_public_path__ = window.publicPath;
 
 import img from './img/relative_path/cat.jpeg';
 

@@ -28,10 +28,11 @@ let htmls = Object.keys(entries).map((html) => {
 
 module.exports = () => { // 多种配置类型: https://webpack.docschina.org/configuration/configuration-types/#exporting-multiple-configurations
     return {
+        // mode: 'development', // webpack 3 不支持
         target: 'web', // 默认是 web, 可忽略: https://webpack.docschina.org/concepts/targets
         entry: entries,
         output: {
-            publicPath: '',
+            publicPath: '/',
             path: path.resolve(__dirname, 'build/'), // 该 path 同样会影响 webpackHtmlPlugin 生成的 html 的路径
             // publicPath: "http://localhost.xheldon.com/assets/js/", // 静态资源路径, 本地服务开发的时候不需要, 相对路径为空即可
             filename: '[name].[hash:8].js'
@@ -77,10 +78,10 @@ module.exports = () => { // 多种配置类型: https://webpack.docschina.org/co
                         loader: 'file-loader',
                         options: {
                             name: '[name].[hash:8].[ext]', // 配置文件在页面的路径和文件名, 可以带上路径如 /img/[name].[hash:8].[ext]
-                            publicPath: 'http://img.xheldon.com', // 发布链接, 用于 cdn, 不会加上下面的 outputPath
+                            publicPath: '', // 发布链接, 用于 cdn, 不会加上下面的 outputPath
                             outputPath: '/image', // 打包输出生成的目录结构文件夹, 通常打包
                             useRelativePath: true, // 默认是 false, 即将文件放在 outputPath 下, 如果设置为 true, 则会根据文件所在的相对路径输出(此例子中, false 会输出为 image/xxx, true 会输出为 image/relative_path/xxx)
-                            emitFile: false // 是否生成文件, 默认是 true, false 的使用场景是引用了 cdn 的图片(设置了 publicPath)
+                            emitFile: true // 是否生成文件, 默认是 true, false 的使用场景是引用了 cdn 的图片(设置了 publicPath)
                         }
                     }]
                 }
@@ -112,9 +113,9 @@ module.exports = () => { // 多种配置类型: https://webpack.docschina.org/co
             // 通过命令行参数 webpack --hot 或者 webpack-dev-server --hot 启动的则会自动添加该插件
         },
         resolveLoader: {}, // 同上面的 resolve 相同, 只是用于解析 webpack 加载的 loader 包
-        plugins: htmls.concat(new CWP({
+        plugins: htmls.concat(new webpack.HotModuleReplacementPlugin()).concat(new CWP({
             isTrue: true
-        })).concat(new webpack.HotModuleReplacementPlugin)/*.concat([
+        }))/*.concat([
             new webpack.optimize.CommonsChunkPlugin({
                 name: 'shit',
                 filename: 'fuck.[hash:6].js',
