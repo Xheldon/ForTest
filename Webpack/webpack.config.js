@@ -34,8 +34,11 @@ module.exports = () => { // 多种配置类型: https://webpack.docschina.org/co
         output: {
             publicPath: '/',
             path: path.resolve(__dirname, 'build/'), // 该 path 同样会影响 webpackHtmlPlugin 生成的 html 的路径
+            chunkFilename: '[name].bundle.js', // 动态导入的文件的命名规则(动态代码拆分时候用到)
             // publicPath: "http://localhost.xheldon.com/assets/js/", // 静态资源路径, 本地服务开发的时候不需要, 相对路径为空即可
-            filename: '[name].[hash:8].js'
+            filename: '[name].[chunkhash:8].js'// hash 是 compilation 相关的, 即每次构建只要任意文件有改动, 都会变化, 没有改动则不会变化, 所有文件均使用相同 hash; chunkhash 只针对某个文件, 若某个文件变化则对应的 chunk 的 hash 变化, 其他没有影响的 chunk 的 hash 不会变化;
+            // 还有一个概念是 contenhash, 被 ExtractTextPlugin 使用, 场景是如果 css 没有变, 那么引用该 css 的 js 其他内容变化了, css 的 hash 也不会变(chunkhash 会, chunkhash 的 js 和其引用的 css 的 hash 一定是一样的)
+            // 注意 如果使用了 chunkhash 则热提换插件需要注释掉
         },
         module: {
             rules: [ // loader API: https://webpack.docschina.org/api/loaders
@@ -79,8 +82,8 @@ module.exports = () => { // 多种配置类型: https://webpack.docschina.org/co
                         options: {
                             name: '[name].[hash:8].[ext]', // 配置文件在页面的路径和文件名, 可以带上路径如 /img/[name].[hash:8].[ext]
                             publicPath: '', // 发布链接, 用于 cdn, 不会加上下面的 outputPath
-                            outputPath: '/image', // 打包输出生成的目录结构文件夹, 通常打包
-                            useRelativePath: true, // 默认是 false, 即将文件放在 outputPath 下, 如果设置为 true, 则会根据文件所在的相对路径输出(此例子中, false 会输出为 image/xxx, true 会输出为 image/relative_path/xxx)
+                            outputPath: 'image', // 打包输出生成的目录结构文件夹, 通常打包, 如果设置了下面的 useRelativePath, 该项配置将被忽略, 前面不要带/, 否则会被当成是 url 而使用 http://image/xxx.jpg 请求导致错误
+                            useRelativePath: false, // 默认是 false, 即将文件放在 outputPath 下, 如果设置为 true, 则会根据文件所在的相对路径输出(此例子中, false 会输出为 image/xxx, true 会输出为 img/relative_path/xxx, 注意是 img, 不是上面 outputPath 的 image 哦)
                             emitFile: true // 是否生成文件, 默认是 true, false 的使用场景是引用了 cdn 的图片(设置了 publicPath)
                         }
                     }]
@@ -113,10 +116,10 @@ module.exports = () => { // 多种配置类型: https://webpack.docschina.org/co
             // 通过命令行参数 webpack --hot 或者 webpack-dev-server --hot 启动的则会自动添加该插件
         },
         resolveLoader: {}, // 同上面的 resolve 相同, 只是用于解析 webpack 加载的 loader 包
-        plugins: htmls.concat(new webpack.HotModuleReplacementPlugin()).concat(new CWP({
+        plugins: htmls/*.concat(new webpack.HotModuleReplacementPlugin())*/.concat(new CWP({
             isTrue: true
         }))/*.concat([
-            new webpack.optimize.CommonsChunkPlugin({
+            new webpack.optimize.CommonsChunkPlugin({ // CommonsChunk 在 webpack4 被废弃, 其推荐使用 splitChunks
                 name: 'shit',
                 filename: 'fuck.[hash:6].js',
                 minChunks: 2
