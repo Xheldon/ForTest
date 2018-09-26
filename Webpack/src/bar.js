@@ -1,4 +1,4 @@
-// __webpack_public_path__ = window.publicPath; // 这个设置只影响异步加载的 chunkFileName, 不影响 chunkNames
+// __webpack_public_path__ = window.publicPath; // 这个设置只影响异步加载的 chunkFileName, img/fonts, 不影响 chunkNames
 
 // 这个文件用来测试异步加载
 

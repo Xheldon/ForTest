@@ -3,7 +3,6 @@ let webpack = require('webpack');
 let HWP = require('html-webpack-plugin');
 let CWP = require('./plugin/ConsoleLogOnBuildWebpackPlugin');
 let glob = require('glob');
-
 let entries = glob.sync('./src/entries/**/index.js').reduce((prev, curr) => {
     prev['assets/' + curr.slice(14, -3)] = curr;
     return prev;
@@ -14,7 +13,7 @@ console.log('???', path.join(__dirname, 'build'));
 
 let htmls = Object.keys(entries).map((html) => {
     return new HWP({
-        title: html.slice(-5, -1),
+        title: html.slice(-5),
         filename: `${html.slice(7, -6)}.html`,
         template: './src/tpl/index.html',
         chunks: [html, 'shit', 'manifest'],
@@ -32,12 +31,12 @@ module.exports = () => { // 多种配置类型: https://webpack.docschina.org/co
         target: 'web', // 默认是 web, 可忽略: https://webpack.docschina.org/concepts/targets
         entry: entries,
         output: {
-            publicPath: '/',
+            // publicPath: '/',
             path: path.resolve(__dirname, 'build/'), // 该 path 同样会影响 webpackHtmlPlugin 生成的 html 的路径
             chunkFilename: '[name].bundle.js', // 动态导入的文件的命名规则(动态代码拆分时候用到)
             // publicPath: "http://localhost.xheldon.com/assets/js/", // 静态资源路径, 本地服务开发的时候不需要, 相对路径为空即可
-            filename: '[name].[chunkhash:8].js'// hash 是 compilation 相关的, 即每次构建只要任意文件有改动, 都会变化, 没有改动则不会变化, 所有文件均使用相同 hash; chunkhash 只针对某个文件, 若某个文件变化则对应的 chunk 的 hash 变化, 其他没有影响的 chunk 的 hash 不会变化;
-            // 还有一个概念是 contenhash, 被 ExtractTextPlugin 使用, 场景是如果 css 没有变, 那么引用该 css 的 js 其他内容变化了, css 的 hash 也不会变(chunkhash 会, chunkhash 的 js 和其引用的 css 的 hash 一定是一样的)
+            filename: '[name].js'// hash 是 compilation 相关的, 即每次构建只要任意文件有改动, 都会变化, 没有改动则不会变化, 所有文件均使用相同 hash; chunkhash 只针对某个文件, 若某个文件变化则对应的 chunk 的 hash 变化, 其他没有影响的 chunk 的 hash 不会变化;
+            // 还有一个概念是 contenthash, 被 ExtractTextPlugin 使用, 场景是如果 css 没有变, 那么引用该 css 的 js 其他内容变化了, css 的 hash 也不会变(chunkhash 会, chunkhash 的 js 和其引用的 css 的 hash 一定是一样的)
             // 注意 如果使用了 chunkhash 则热提换插件需要注释掉
         },
         module: {
