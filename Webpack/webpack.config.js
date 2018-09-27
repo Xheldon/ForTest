@@ -25,6 +25,7 @@ let htmls = Object.keys(entries).map((html) => {
     });
 });
 
+console.log('node_env:', process.env.NODE_ENV);
 module.exports = () => { // 多种配置类型: https://webpack.docschina.org/configuration/configuration-types/#exporting-multiple-configurations
     return {
         // mode: 'development', // webpack 3 不支持
@@ -106,7 +107,7 @@ module.exports = () => { // 多种配置类型: https://webpack.docschina.org/co
         devServer: { // 装了 webpack-dev-server 了才能用, 3以上还要安装 webpack-cli, 装完还报错 TypeError: Cannot match against 'undefined' or 'null'
             // 搜索了下才知道, webpack 版本是 3 的话, w-d-s 版本需要时2; w 版本是 4 的话, w-d-s 才能是3 , 因此降级w-d-s~~~
             contentBase: path.join(__dirname, '/build'),
-            open: true, // 启动后自动打开浏览器
+            open: false, // 启动后自动打开浏览器
             compress: true,
             port: 9000,
             noInfo: false, // 是否输出打包信息, 仍然会输出编译警告和错误
@@ -115,10 +116,21 @@ module.exports = () => { // 多种配置类型: https://webpack.docschina.org/co
             // 通过命令行参数 webpack --hot 或者 webpack-dev-server --hot 启动的则会自动添加该插件
         },
         resolveLoader: {}, // 同上面的 resolve 相同, 只是用于解析 webpack 加载的 loader 包
+<<<<<<< Updated upstream
         plugins: htmls/*.concat(new webpack.HotModuleReplacementPlugin())*/.concat(new CWP({
             isTrue: true
         }))/*.concat([
             new webpack.optimize.CommonsChunkPlugin({ // CommonsChunk 在 webpack4 被废弃, 其推荐使用 splitChunks
+=======
+        plugins: htmls.concat([
+            new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)}), // 这个鬼东西可以让打包的模块访问环境变量 process.env.NODE_ENV 从而区分不同环境, 但是蛋疼的其相当于是执行了 eval 需要 stringify 后才能在打包文件中被解析成字符串, 否则会被解析成变量
+            new webpack.HotModuleReplacementPlugin(),
+            new CWP({
+                isTrue: true
+            })
+        ])/*.concat([
+            new webpack.optimize.CommonsChunkPlugin({
+>>>>>>> Stashed changes
                 name: 'shit',
                 filename: 'fuck.[hash:6].js',
                 minChunks: 2
