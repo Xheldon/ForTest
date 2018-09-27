@@ -1,12 +1,7 @@
-<<<<<<< Updated upstream
-// __webpack_public_path__ = window.publicPath; // 这个设置只影响异步加载的 chunkFileName, 不影响 chunkNames
-=======
 // __webpack_public_path__ = window.publicPath; // 这个东西可以替代 config.output.publicPath 但只对异步加载的资源有效
->>>>>>> Stashed changes
 
 // import bar from '../../bar';
 console.log('about');
-<<<<<<< Updated upstream
 
 function getCom () {
     let ele = document.createElement('button');
@@ -23,7 +18,3 @@ function getCom () {
 
 
 document.body.appendChild(getCom());
-=======
-console.log('NODE_ENV:', process.env.NODE_ENV);
-bar();
->>>>>>> Stashed changes
