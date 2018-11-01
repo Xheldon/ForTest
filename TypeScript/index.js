@@ -8,7 +8,7 @@ var A = /** @class */ (function () {
     return A;
 }());
 function hello(person) {
-    return 'Hello' + person;
+    return 'Hello' + person.firstname + person.lastname;
 }
 function world(name) {
     return name;

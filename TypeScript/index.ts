@@ -4,17 +4,17 @@ interface Person {
 }
 
 class A {
-    fullname: string;
-    constructor (public firstname, public mid, public lastname) {
+    fullname: string // 实例属性
+    constructor (public firstname: string, public mid: string, public lastname: string) { // 因为 tsconfig.json 中的 strict 被设置成了 true, 因此 参数需要指明 类型; public 创建同名成员
         this.fullname = firstname + mid + lastname;
     }
+} 
+
+function hello (person: Person) { // 自定义参数类型
+    return 'Hello' + person.firstname + person.lastname;
 }
 
-function hello (person: Person) {
-    return 'Hello' + person;
-}
-
-function world (name: Array<number>) {
+function world (name: Array<number>) { // 确定数组元素类型
     return name;
 }
 
