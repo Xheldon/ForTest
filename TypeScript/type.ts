@@ -17,7 +17,7 @@ let a = 'b';
 document.body.innerHTML = hello(user);
 
 /* 元组 Tuple */
-// 元组表示一直数量和类型的数组
+// 元组表示已知数量和类型的数组
 let x: [string, number];
 x = ['hello', 1];
 // 文档说访问其越界索引时, 会以联合类型代替(即其已经声明的 string/number), 但是实际 eslint 会报错
@@ -34,6 +34,15 @@ function accross (name: number[]) {
 }
 console.log(world([2, 3, 4]));
 console.log(accross([1, 2, 3]));
+
+/* 只读数组 */
+let rAndW: Array<number> = [4, 5, 6];
+let ro: ReadonlyArray<number> = [1, 2, 3];
+// ro.push(4) => error!
+ro = rAndW // 居然可以???
+// rAndW = ro => error
+// 上述 error 可以这么解决:
+rAndW = ro as number[];
 
 /* 枚举类型 */
 enum Color {Red, Blue, Green}; // 枚举类型
