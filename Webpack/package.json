@@ -5,6 +5,10 @@
   "main": "webpack.config.js",
   "scripts": {
     "build": "rm -rf ./build && webpack",
+<<<<<<< HEAD
+=======
+    "dll": "webpack --config webpack.config.dll.js",
+>>>>>>> 0cb32c124de1f04426c979d64b7f779c44035b31
     "watch": "webpack --watch",
     "dev": "NODE_ENV=production webpack-dev-server",
     "server": "node server.js"
