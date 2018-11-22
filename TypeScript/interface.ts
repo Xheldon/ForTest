@@ -1,4 +1,5 @@
-/* 接口用来自定义某种类型 */
+(()=>{
+    /* 接口用来自定义某种类型 */
 
 /* 可选属性 */
 interface LabeldValue {
@@ -149,3 +150,5 @@ class Cup {
 interface BigCup extends Cup {
     size: string
 }
+
+})();

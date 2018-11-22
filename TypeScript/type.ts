@@ -1,4 +1,5 @@
-/* 接口定义 */
+(()=>{
+    /* 接口定义 */
 interface Person {
     firstname: string;
     lastname: string
@@ -84,3 +85,4 @@ let some: any = 'this is a string'
 let l: number = (<string>some).length;
 // or:
 let i: number = (some as string).length;
+})();
