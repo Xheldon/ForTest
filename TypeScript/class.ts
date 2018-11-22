@@ -1,4 +1,5 @@
-/* 现在 es6 不支持像 ts 这样的类的静态属性的写法, 不过 es7 已经有以下提案了: */
+(()=>{
+    /* 现在 es6 不支持像 ts 这样的类的静态属性的写法, 不过 es7 已经有以下提案了: */
 /* class A {
     name = 'Xheldon'; // => 实例属性的写法
     static name =  'Xheldon' // => 类静态属性的写法
@@ -14,6 +15,20 @@ class B {
         this.name = name;
     }
 }
+/* 类的方法的两种声明方式: */
+class C {
+    c: (d: string) => number;
+    e (d: string): number {
+        return Number(d);
+    };
+    // c 函数相当于:
+    cc = function () {}; // 该 function 满足 (d: string) => number
+    // e 函数相当于: 
+    ee () {}; // 同上
+}
+
+
+
 
 /* public private protected 区别*/
 // public 默认, 不解释
@@ -21,8 +36,8 @@ class B {
 // protected: 派生类中可访问, 类外不能访问, 构造函数 constructor 也能被标记为 protected, 此时该类不可被实例化, 只能被继承
 // 构造器 contructor 中的参数带的修饰符, 会自动变成实例的属性:
 class Show {
-    constructor (public name: string, private age: number, protected sex: string) {
-        this.name = '4'; // 和使用 name = '4'; 效果一样...?
+    constructor (public name: string, private age: number, protected sex: string) { // public name: string 相当于是 this.name = name;
+        this.name = '4';
     }
 }
 // 只有 get 没有 set 的方法自动被识别为 readonly:
@@ -33,6 +48,7 @@ class Me {
 }
 
 /* 最后, 类和接口的区别 */
+// 接口创建的只是类型, 而类不但可以创建类型, 还可以创建构造函数
 // 类可以包含访问修饰符, 接口不能
 // 接口的方法不包含具体实现, 类包含(抽象类类似于接口, 可以不包含具体实现, 而且声明方式跟接口一样)
 // 其他基本上可以把类当成接口使用(声明类型等)
@@ -61,3 +77,5 @@ let department: Department; // 允许创建一个对抽象类型的引用
 // department = new Department() => error!
 department = new AccDepartment();
 // department.otherPrint(); => error! 
+
+})();
