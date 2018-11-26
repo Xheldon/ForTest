@@ -70,7 +70,7 @@ class AccDepartment extends Department {
         console.log('holy');
     }
     otherPrint(): void {
-        // 该防范可以声明, 但是在实例中无法调用会报错
+        // 该方法可以声明, 但是在实例中无法调用会报错
     }
 }
 let department: Department; // 允许创建一个对抽象类型的引用
