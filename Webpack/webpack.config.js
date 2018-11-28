@@ -91,7 +91,7 @@ module.exports = () => { // 多种配置类型: https://webpack.docschina.org/co
             ]
         },
         resolve: { // https://webpack.docschina.org/configuration/resolve/#resolve-mainfields
-            modules: ['node_modules'], // 指定 import 搜索的文件夹, 顺序从左到右
+            modules: ['node_modules', './src/library'], // 指定 import 搜索的文件夹, 顺序从左到右
             alias: {
                 '@src': path.resolve(__dirname, 'src') // import 模块的别名
             },
@@ -106,7 +106,11 @@ module.exports = () => { // 多种配置类型: https://webpack.docschina.org/co
         },
         devServer: { // 装了 webpack-dev-server 了才能用, 3以上还要安装 webpack-cli, 装完还报错 TypeError: Cannot match against 'undefined' or 'null'
             // 搜索了下才知道, webpack 版本是 3 的话, w-d-s 版本需要时2; w 版本是 4 的话, w-d-s 才能是3 , 因此降级w-d-s~~~
+<<<<<<< HEAD
             contentBase: path.join(__dirname, '/build'),
+=======
+            contentBase: path.join(__dirname, '/'), // 静态文件引用目录, 此处设置为根目录, 因为 build 文件夹和 dll 文件夹是同一级, 如果设置为 /build, 则 html 无法引用 dll 的文件
+>>>>>>> 9734d76ecf45471e81e1f940f754fe5e919ead8e
             open: false, // 启动后自动打开浏览器
             compress: true,
             port: 9000,
@@ -116,9 +120,13 @@ module.exports = () => { // 多种配置类型: https://webpack.docschina.org/co
             // 通过命令行参数 webpack --hot 或者 webpack-dev-server --hot 启动的则会自动添加该插件
         },
         resolveLoader: {}, // 同上面的 resolve 相同, 只是用于解析 webpack 加载的 loader 包
-        plugins: htmls/*.concat(new webpack.HotModuleReplacementPlugin())*/.concat(new CWP({
+        plugins: htmls.concat(new webpack.HotModuleReplacementPlugin()).concat(new CWP({
             isTrue: true
-        }))/*.concat([
+        }),
+            new webpack.DllReferencePlugin({ // 使用了这个插件后, 再 chunk 中引入了 DllPlugin 打包的库之后, 就会寻找对应生成的文件名了
+                context: __dirname,
+                manifest: require('./dll/vendor-manifest.json')
+            }))/*.concat([
             new webpack.optimize.CommonsChunkPlugin({ // CommonsChunk 在 webpack4 被废弃, 其推荐使用 splitChunks
         plugins: htmls.concat([
             new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)}), // 这个鬼东西可以让打包的模块访问环境变量 process.env.NODE_ENV 从而区分不同环境, 但是蛋疼的其相当于是执行了 eval 需要 stringify 后才能在打包文件中被解析成字符串, 否则会被解析成变量
