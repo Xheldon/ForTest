@@ -125,6 +125,7 @@ function getCounter (): Counter {
 /* 
     extends 理解为扩展一个 interface, 但是其还是一个 interface, 其只声明了一些方法, 并没有声明实现, 如果需要实现则仍然需要下面的 implements 
     implements 理解为实现一个 interface, 即在 interface 中交代了方法的参数/返回值, 具体实现还是需要 implements 来完成
+    一个 class implement 另一个 class 的时候, 前者会将后者作为 interface, 只使用后者的类型, 而非实现; 这意味着你需要在前者中自己实现接口;
     例子:
 */
 interface Control {
@@ -150,5 +151,4 @@ class Cup {
 interface BigCup extends Cup {
     size: string
 }
-
 })();
