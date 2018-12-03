@@ -21,9 +21,27 @@ class aaa<T> {
 class bbb<T> {
     c: T;
     // static d = T; // error => Static members cannot reference class type parameters.
-    static d (a: T): T {}; // error => Static members cannot reference class type parameters.
-    static e: (a: T) => T; 
+    // static d (a: T): T {}; // error => Static members cannot reference class type parameters.
+    // static e: (a: T) => T; // error => Static members cannot reference class type parameters.
 }
 
+/* 泛型约束 */
+// 正常写法, 想操作参数的 .length 属性, 必须让参数带上该属性
+function loggingIdentify<T>(arg: T[]): T {
+    // 这样就可以使用arg.length了
+    console.log(arg.length);
+    return arg[0];
+}
+interface LengthWise {
+    length: number;
+}
+function loggingIdentityTwo<T extends LengthWise>(arg: T): T {
+    return arg;
+}
 
+// 泛型中使用 类类型
+
+function create<T>(c: {new(): T}): T {
+    return new c();
+}
 })();
