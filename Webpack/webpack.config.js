@@ -106,11 +106,8 @@ module.exports = () => { // 多种配置类型: https://webpack.docschina.org/co
         },
         devServer: { // 装了 webpack-dev-server 了才能用, 3以上还要安装 webpack-cli, 装完还报错 TypeError: Cannot match against 'undefined' or 'null'
             // 搜索了下才知道, webpack 版本是 3 的话, w-d-s 版本需要时2; w 版本是 4 的话, w-d-s 才能是3 , 因此降级w-d-s~~~
-<<<<<<< HEAD
-            contentBase: path.join(__dirname, '/build'),
-=======
+            // contentBase: path.join(__dirname, '/build'),
             contentBase: path.join(__dirname, '/'), // 静态文件引用目录, 此处设置为根目录, 因为 build 文件夹和 dll 文件夹是同一级, 如果设置为 /build, 则 html 无法引用 dll 的文件
->>>>>>> 0cb32c124de1f04426c979d64b7f779c44035b31
             open: false, // 启动后自动打开浏览器
             compress: true,
             port: 9000,
